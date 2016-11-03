@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.accipio.tutorme.SetupActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, Person!"
+            android:id="@+id/info"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_marginTop="13dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#808080"
+            android:textCursorDrawable="@null"
+            android:hint="School email" />
+
+        <TextView
+            android:layout_width="343dp"
+            android:layout_height="wrap_content"
+            android:text="*This will be used to match you up with others at your institution"
+            android:id="@+id/textView"
+            android:layout_marginLeft="5dp"
+            android:textSize="11dp" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Courses"
+            android:backgroundTint="#808080"
+            android:textCursorDrawable="@null"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter course codes or fields you need help with"
+            android:id="@+id/textView3"
+            android:layout_marginLeft="5dp"
+            android:textSize="11dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you want to be a tutor?"
+            android:id="@+id/checkBox"
+            android:buttonTint="?attr/colorPrimary"
+            android:checked="false"
+            android:layout_marginTop="30dp" />
+
+        <EditText
+            android:id="@+id/editText5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#808080"
+            android:hint="Description"
+            android:textCursorDrawable="@null"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#808080"
+            android:hint="Rate (per hour)"
+            android:textCursorDrawable="@null"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Courses"
+            android:backgroundTint="#808080"
+            android:textCursorDrawable="@null"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter course codes or fields you would like to teach"
+            android:id="@+id/textView2"
+            android:layout_marginLeft="5dp"
+            android:textSize="11dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.11" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="?attr/colorPrimary"
+            android:text="Go"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="35dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

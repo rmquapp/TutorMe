@@ -1,4 +1,4 @@
-package com.cpsc.tutorme;
+package com.accipio.tutorme;
 
 import org.junit.Test;
 

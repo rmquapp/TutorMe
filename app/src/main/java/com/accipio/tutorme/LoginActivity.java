@@ -1,4 +1,4 @@
-package com.cpsc.tutorme;
+package com.accipio.tutorme;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,6 +31,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.facebook.FacebookSdk;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
