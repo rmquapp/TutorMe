@@ -10,6 +10,7 @@ public class TutorMeApplication extends Application {
     private String userID;
     private String firstName;
     private String lastName;
+    private boolean tutor = false;
 
     public String setID() {
         return userID;
@@ -33,5 +34,13 @@ public class TutorMeApplication extends Application {
 
     public void setLastName(String lname) {
         lastName = lname;
+    }
+
+    public boolean isTutor() {
+        return tutor;
+    }
+
+    public void setTutor(boolean isTutor) {
+        tutor = isTutor;
     }
 }

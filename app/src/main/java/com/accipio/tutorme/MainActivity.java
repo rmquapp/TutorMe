@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         }
         callbackManager = CallbackManager.Factory.create();
 
-//        AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_main);
 
         loginButton = (LoginButton)findViewById(R.id.login_button);

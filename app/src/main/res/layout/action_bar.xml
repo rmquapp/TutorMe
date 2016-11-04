@@ -1,0 +1,14 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/btn_slide"
+        android:layout_height="20dp"
+        android:layout_width="20dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:src="@drawable/menu"
+        android:onClick="toggleMenu"
+        android:paddingTop="4dp"/>
+</RelativeLayout>

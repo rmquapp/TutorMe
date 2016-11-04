@@ -32,7 +32,7 @@
             android:layout_height="30dp" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#808080"
@@ -43,12 +43,12 @@
             android:layout_width="343dp"
             android:layout_height="wrap_content"
             android:text="*This will be used to match you up with others at your institution"
-            android:id="@+id/textView"
+            android:id="@+id/emailInfo"
             android:layout_marginLeft="5dp"
             android:textSize="11dp" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/learnCourses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Courses"
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enter course codes or fields you need help with"
-            android:id="@+id/textView3"
+            android:id="@+id/learnCoursesInfo"
             android:layout_marginLeft="5dp"
             android:textSize="11dp" />
 
@@ -75,39 +75,43 @@
             android:textSize="16dp" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#808080"
             android:hint="Description"
             android:textCursorDrawable="@null"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:visibility="invisible" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#808080"
             android:hint="Rate (per hour)"
             android:textCursorDrawable="@null"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:visibility="invisible" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/teachCourses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Courses"
             android:backgroundTint="#808080"
             android:textCursorDrawable="@null"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enter course codes or fields you would like to teach"
-            android:id="@+id/textView2"
+            android:id="@+id/teachCoursesInfo"
             android:layout_marginLeft="5dp"
-            android:textSize="11dp" />
+            android:textSize="11dp"
+            android:visibility="invisible" />
 
         <Space
             android:layout_width="match_parent"
