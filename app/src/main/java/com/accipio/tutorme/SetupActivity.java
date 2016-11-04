@@ -1,10 +1,12 @@
 package com.accipio.tutorme;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
-public class SetupActivity extends AppCompatActivity {
+public class SetupActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView info;
 
@@ -14,6 +16,8 @@ public class SetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
 
         info = (TextView)findViewById(R.id.info);
+        findViewById(R.id.go).setOnClickListener(this);
+
         showName();
     }
 
@@ -21,5 +25,12 @@ public class SetupActivity extends AppCompatActivity {
         String firstName = ((TutorMeApplication) SetupActivity.this.getApplication()).getFirstName();
         String greeting = String.format("Hello, %s!", firstName);
         info.setText(greeting);
+    }
+
+    public void onClick(View view) {
+        if (view.getId() == R.id.go) {
+            Intent intent = new Intent(this, BrowseActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -71,7 +71,8 @@
             android:id="@+id/checkBox"
             android:buttonTint="?attr/colorPrimary"
             android:checked="false"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="30dp"
+            android:textSize="16dp" />
 
         <EditText
             android:id="@+id/editText5"
@@ -119,7 +120,7 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:background="?attr/colorPrimary"
             android:text="Go"
-            android:id="@+id/button"
+            android:id="@+id/go"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="35dp" />
 
