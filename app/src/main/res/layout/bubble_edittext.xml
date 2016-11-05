@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edtTxt1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bubble_edittext"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:layout_marginBottom="20dp"
+    android:shadowColor="#FFFFFF"
+    android:shadowDy="1"
+    android:shadowRadius="0.01"
+    android:textColor="#000000"
+    android:textSize="56dp" />
