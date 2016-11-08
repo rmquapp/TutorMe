@@ -1,24 +1,30 @@
 package com.accipio.tutorme;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v7.widget.SwitchCompat;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class BrowseActivity extends AppCompatActivity {
+
+public class BrowseActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +47,40 @@ public class BrowseActivity extends AppCompatActivity {
 
         handleCheckBox();
 
-        addDrawerItems();
+        setupNavigationDrawer();
     }
 
-    private void addDrawerItems() {
-        ListView mDrawerList;
-        ArrayAdapter<String> mAdapter;
-        mDrawerList = (ListView)findViewById(R.id.menu);
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        goToSelection(id);
+        return true;
+    }
 
-        String[] osArray = { "Name", "Item1", "Item2", "Item3", "Item4" };
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
-        mDrawerList.setAdapter(mAdapter);
+    private void goToSelection(int id) {
+        Intent intent = null;
+        switch (id) {
+            case R.id.drawer_home:
+                // Browse activity, no page change
+                toggleMenu(getCurrentFocus());
+                return;
+            case R.id.drawer_settings:
+                intent = new Intent(this, SetupActivity.class);
+                break;
+            case R.id.drawer_messages:
+                // TODO: replace with messaging activity if we get to that point
+                return;
+            case R.id.drawer_about:
+                // TODO: replace with about page
+                return;
+            case R.id.drawer_policy:
+                // TODO: replace with privacy policy page
+                return;
+            default:
+                break;
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private void populateList(RecyclerView recycler) {
@@ -91,5 +120,26 @@ public class BrowseActivity extends AppCompatActivity {
         else {
             drawer.openDrawer(Gravity.LEFT);
         }
+    }
+
+    private void setupNavigationDrawer() {
+        NavigationView navView = (NavigationView) findViewById(R.id.menu);
+        navView.setNavigationItemSelectedListener(this);
+
+        View hView =  navView.getHeaderView(0);
+
+        String fname = ((TutorMeApplication) BrowseActivity.this.getApplication()).getFirstName();
+        String lname = ((TutorMeApplication) BrowseActivity.this.getApplication()).getLastName();
+        TextView name = (TextView)hView.findViewById(R.id.header_name);
+        name.setText(String.format("%s %s", fname, lname));
+
+        Bitmap picture = ((TutorMeApplication) BrowseActivity.this.getApplication()).getImage();
+        CircleImageView image = (CircleImageView)hView.findViewById(R.id.header_image);
+        image.setImageBitmap(picture);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String email = prefs.getString("email", "");
+        TextView emailView = (TextView)hView.findViewById(R.id.header_email);
+        emailView.setText(email);
     }
 }

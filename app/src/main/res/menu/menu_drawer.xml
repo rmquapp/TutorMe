@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".MainActivity">
+
+    <group android:id="@+id/grp1" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/drawer_home"
+            android:checked="true"
+            android:fontFamily="sans-serif-light"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
+            android:id="@+id/drawer_settings"
+            android:checked="true"
+            android:fontFamily="sans-serif-light"
+            android:icon="@drawable/settings"
+            android:title="My Settings" />
+        <item
+            android:id="@+id/drawer_messages"
+            android:checked="true"
+            android:fontFamily="sans-serif-light"
+            android:icon="@drawable/message"
+            android:title="Messages [0]" />
+    </group>
+    <group android:id="@+id/grp2" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/drawer_about"
+            android:fontFamily="sans-serif-light"
+            android:title="About" />
+        <item
+            android:id="@+id/drawer_policy"
+            android:fontFamily="sans-serif-light"
+            android:title="Privacy Policy" />
+    </group>
+</menu>

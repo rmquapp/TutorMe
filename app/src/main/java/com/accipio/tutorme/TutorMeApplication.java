@@ -1,6 +1,8 @@
 package com.accipio.tutorme;
 
 import android.app.Application;
+import android.graphics.Bitmap;
+
 
 /**
  * Created by rachel on 2016-11-02.
@@ -11,6 +13,7 @@ public class TutorMeApplication extends Application {
     private String firstName;
     private String lastName;
     private boolean tutor = false;
+    private Bitmap image;
 
     public String setID() {
         return userID;
@@ -42,5 +45,13 @@ public class TutorMeApplication extends Application {
 
     public void setTutor(boolean isTutor) {
         tutor = isTutor;
+    }
+
+    public void setImage(Bitmap picture) {
+        image = picture;
+    }
+
+    public Bitmap getImage() {
+        return image;
     }
 }

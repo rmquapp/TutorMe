@@ -10,8 +10,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class SetupActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -76,17 +80,43 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void onClick(View view) {
-        if (isTutor) {
-            ((TutorMeApplication) SetupActivity.this.getApplication()).setTutor(true);
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SetupActivity.this);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("isTutor", isTutor);
-            editor.apply();
-        }
-
         if (view.getId() == R.id.go) {
+            saveInfo();
+
             Intent intent = new Intent(this, BrowseActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void saveInfo() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SetupActivity.this);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        Map<String, Integer> map = new HashMap<String, Integer>()
+        {{
+            put("email", R.id.email);
+            put("toLearn", R.id.toLearn);
+            put("desc", R.id.desc);
+            put("toTeach", R.id.toTeach);
+            put("rate", R.id.rate);
+        }};
+
+        Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            EditText editText = (EditText) findViewById((Integer)pair.getValue());
+            String text = editText.getText().toString();
+            if (text != null && !text.isEmpty()) {
+                editor.putString(pair.getKey().toString(), text);
+            }
+        }
+        it.remove();
+
+        if (isTutor) {
+            ((TutorMeApplication) SetupActivity.this.getApplication()).setTutor(true);
+
+            editor.putBoolean("isTutor", isTutor);
+        }
+        editor.apply();
     }
 }

@@ -3,19 +3,17 @@ package com.accipio.tutorme;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.facebook.AccessToken;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -23,7 +21,6 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.widget.LoginButton;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
 //import com.sinch.android.rtc.ClientRegistration;
@@ -32,7 +29,9 @@ import com.facebook.login.LoginResult;
 //import com.sinch.android.rtc.SinchClientListener;
 //import com.sinch.android.rtc.SinchError;
 
+import java.io.IOException;
 import java.lang.InterruptedException;
+import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONException;
@@ -161,10 +160,34 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    private class getFBProfilePicture extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            Bitmap bitmap = null;
+            try {
+                URL imageURL = new URL(urls[0]);
+                bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+            } catch (IOException e) {
+                System.out.println(e.getStackTrace());
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            ((TutorMeApplication) MainActivity.this.getApplication()).setImage(result);
+        }
+    }
+
     private void setGlobalUserData(String fname, String lname, String id) {
         ((TutorMeApplication) MainActivity.this.getApplication()).setFirstName(fname);
         ((TutorMeApplication) MainActivity.this.getApplication()).setLastName(lname);
         ((TutorMeApplication) MainActivity.this.getApplication()).setID(id);
+
+        // Retrieve and store profile picture
+        getFBProfilePicture task = new getFBProfilePicture();
+        task.execute(new String[] { "https://graph.facebook.com/" + id + "/picture?type=large" });
     }
 
     private void persistUserData(String fname, String lname, String id) {
