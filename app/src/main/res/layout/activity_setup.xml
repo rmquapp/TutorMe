@@ -80,9 +80,9 @@
             android:text="Do you want to be a tutor?"
             android:id="@+id/checkBox"
             android:buttonTint="?attr/colorPrimary"
-            android:checked="false"
             android:layout_marginTop="30dp"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:checked="false" />
 
         <EditText
             android:id="@+id/desc"
