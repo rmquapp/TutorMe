@@ -13,15 +13,14 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class SetupActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView info;
 
     private boolean isTutor;
+
+    private int[] ids = {R.id.email, R.id.toLearn, R.id.toTeach, R.id.description, R.id.rate};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,8 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
         showName();
 
         setupCheckBox();
+
+        restoreInfo();
 
         setupBubbleTextViews();
     }
@@ -50,7 +51,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
                    @Override
                    public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                        int visibility = isChecked ? View.VISIBLE : View.INVISIBLE;
-                       findViewById(R.id.desc).setVisibility(visibility);
+                       findViewById(R.id.description).setVisibility(visibility);
                        findViewById(R.id.toTeach).setVisibility(visibility);
                        findViewById(R.id.teachCoursesInfo).setVisibility(visibility);
                        findViewById(R.id.rate).setVisibility(visibility);
@@ -77,6 +78,8 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
                     android.R.layout.simple_dropdown_item_1line, item));
             bubble.setTokenizer(new SpaceTokenizer());
         }
+        toLearn.setBubbles();
+        toTeach.setBubbles();
     }
 
     public void onClick(View view) {
@@ -88,35 +91,36 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void restoreInfo() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        for (int id : ids) {
+            String text = prefs.getString(String.valueOf(id), "");
+            EditText editText = (EditText) findViewById(id);
+            if (text != null && !text.isEmpty()) {
+                editText.setText(text);
+            }
+        }
+
+        if (((TutorMeApplication) SetupActivity.this.getApplication()).isTutor()) {
+            CheckBox box = (CheckBox)findViewById(R.id.checkBox);
+            box.setChecked(true);
+        }
+    }
+
     private void saveInfo() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SetupActivity.this);
         SharedPreferences.Editor editor = prefs.edit();
 
-        Map<String, Integer> map = new HashMap<String, Integer>()
-        {{
-            put("email", R.id.email);
-            put("toLearn", R.id.toLearn);
-            put("desc", R.id.desc);
-            put("toTeach", R.id.toTeach);
-            put("rate", R.id.rate);
-        }};
-
-        Iterator it = map.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            EditText editText = (EditText) findViewById((Integer)pair.getValue());
+        for (int id : ids) {
+            EditText editText = (EditText) findViewById(id);
             String text = editText.getText().toString();
-            if (text != null && !text.isEmpty()) {
-                editor.putString(pair.getKey().toString(), text);
-            }
+            editor.putString(String.valueOf(id), text);
         }
-        it.remove();
 
-        if (isTutor) {
-            ((TutorMeApplication) SetupActivity.this.getApplication()).setTutor(true);
+        ((TutorMeApplication) SetupActivity.this.getApplication()).setTutor(isTutor);
+        editor.putBoolean("isTutor", isTutor);
 
-            editor.putBoolean("isTutor", isTutor);
-        }
         editor.apply();
     }
 }
