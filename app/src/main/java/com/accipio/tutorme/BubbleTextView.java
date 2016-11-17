@@ -59,18 +59,22 @@ public class BubbleTextView extends MultiAutoCompleteTextView implements OnItemC
         }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count,int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
         @Override
         public void afterTextChanged(Editable s) {}
     };
 
-    private void setBubbles() {
+    public void setBubbles() {
 
         SpannableStringBuilder sb = new SpannableStringBuilder();
         String fullString = getText().toString();
 
         String[] strings = fullString.split(" ");
+
+        if (fullString.length() < 1) {
+            return;
+        }
 
         for (int i = 0; i < strings.length; i++) {
 

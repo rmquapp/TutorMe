@@ -85,7 +85,7 @@
             android:textSize="16dp" />
 
         <EditText
-            android:id="@+id/desc"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#808080"
