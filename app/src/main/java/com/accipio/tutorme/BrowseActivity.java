@@ -26,11 +26,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BrowseActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_browse);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
@@ -79,6 +82,8 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
             default:
                 break;
         }
+        drawer.closeDrawer(Gravity.LEFT, false);
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -113,7 +118,6 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
     }
 
     public void toggleMenu(View view) {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(Gravity.LEFT)) {
             drawer.closeDrawer(Gravity.LEFT);
         }

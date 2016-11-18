@@ -1,5 +1,6 @@
 package com.accipio.tutorme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -9,9 +10,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -37,38 +42,44 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends AppCompatActivity {
 
-    private LoginButton loginButton;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private CallbackManager callbackManager;
+
+    private LoginButton facebookLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         FacebookSDKinitializeDelay();
 
-        boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
-        if (loggedIn) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            String fname = prefs.getString("firstName", "");
-            String lname = prefs.getString("lastName", "");
-            String id = prefs.getString("ID", "");
-
-            setGlobalUserData(fname, lname, id);
-            startMainActivity();
+        if (AccessToken.getCurrentAccessToken() != null) {
+            goToHome();
         }
+
+        hideBars();
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
+
         callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.activity_main);
 
-        loginButton = (LoginButton)findViewById(R.id.login_button);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        EditText password = (EditText)findViewById(R.id.password);
+        password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-        registerLoginCallback();
+        findViewById(R.id.facebook).setOnClickListener(this);
+        facebookLogin = (LoginButton)findViewById(R.id.fb_login);
+        registerLoginCallback(facebookLogin);
 
 // TODO: Fix
 //        // Instantiate a SinchClient using the SinchClientBuilder.
@@ -96,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
 //        sinchClient.start();
     }
 
-    private void registerLoginCallback() {
+    private void registerLoginCallback(LoginButton loginButton) {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 getFBDetails(loginResult);
-                startMainActivity();
+                startActivity(SetupActivity.class);
             }
 
             @Override
@@ -149,17 +160,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void FacebookSDKinitializeDelay() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(150);
         } catch (InterruptedException e) {
             System.out.println(e.getStackTrace());
         }
     }
 
-    private void startMainActivity() {
-        Intent intent = new Intent(MainActivity.this, SetupActivity.class);
-        startActivity(intent);
+    private void goToHome() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String fname = prefs.getString("firstName", "");
+        String lname = prefs.getString("lastName", "");
+        String id = prefs.getString("ID", "");
+
+        setGlobalUserData(fname, lname, id);
+        startActivity(BrowseActivity.class);
     }
 
+    private void hideBars() {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private void startActivity(Class c) {
+        Intent intent = new Intent(MainActivity.this, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+    }
 
     private class getFBProfilePicture extends AsyncTask<String, Void, Bitmap> {
         @Override
@@ -199,6 +229,12 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    public void onClick(View view) {
+        if (view.getId() == R.id.facebook) {
+            facebookLogin.performClick();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -223,5 +259,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }
