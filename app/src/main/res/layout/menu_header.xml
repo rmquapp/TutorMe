@@ -4,7 +4,7 @@
     android:layout_height="178dp"
     android:id="@+id/header_bg"
     android:orientation="vertical"
-    android:background="@drawable/android"
+    android:background="@drawable/slider_bg"
     android:weightSum="1">
 
     <LinearLayout
