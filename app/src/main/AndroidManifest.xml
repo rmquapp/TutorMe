@@ -53,7 +53,8 @@
             android:exported="true" />
 
         <activity
-            android:label="@string/app_name" android:name=".MainMenu"/>
+            android:label="@string/app_name" android:name=".MainMenu"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
     </application>
 

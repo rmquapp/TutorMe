@@ -4,7 +4,8 @@
     android:shape="ring"
     android:innerRadius="120dp"
     android:thickness="10dp"
-    android:useLevel="false">
+    android:useLevel="false"
+    android:contentDescription="menuCircle">
 
     <gradient
         android:startColor="@color/colorAccent"

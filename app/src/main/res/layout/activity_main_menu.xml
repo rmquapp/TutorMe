@@ -9,7 +9,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.accipio.tutorme.MainMenu">
+    android:background="#FFFFFF"
+    tools:context=".MainMenu">
+
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/my_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:background="@color/colorPrimaryDark"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true" />
+
 
     <ImageView
         android:layout_width="300dp"
@@ -17,5 +31,29 @@
         app:srcCompat="@drawable/menu_circle"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/menuCircle" />
+        android:id="@+id/menuCircle"
+        android:contentDescription="" />
+
+    <TextView
+        android:text="30,000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView4"
+        android:typeface="monospace"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:text="People Online:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:typeface="monospace"
+        android:textStyle="bold"/>
+
 </RelativeLayout>
