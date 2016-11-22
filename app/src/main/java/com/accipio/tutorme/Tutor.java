@@ -11,14 +11,16 @@ public class Tutor {
     private String[] courses;
     private String rating;
     private int status;
+    private String price;
 
-    public Tutor(String id, String name, String desc, String[] courses, String rating, int status) {
+    public Tutor(String id, String name, String desc, String[] courses, String rating, int status, String price) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.courses = courses;
         this.rating = rating;
         this.status = status;
+        this.price = price;
     }
 
     public String getId() {
@@ -44,4 +46,6 @@ public class Tutor {
     public int getStatus() {
         return status;
     }
+
+    public String getPrice() { return price; }
 }

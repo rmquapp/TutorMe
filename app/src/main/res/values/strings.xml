@@ -12,7 +12,9 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="facebook_app_id">1789367637972577</string>
+    <!--<string name="facebook_app_id">1789367637972577</string> -->
+    <string name="facebook_app_id">341576069543001</string>
+
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
@@ -30,5 +32,12 @@
         <item>ENGG</item>
         <item>CPSC</item>
         <item>PSYC</item>
+    </string-array>
+
+    <string name = "ok">update </string>
+    <string name = "cancel">cancel</string>
+    <string-array name = "filters" >
+        <item>Price</item>
+        <item>Rating</item>
     </string-array>
 </resources>

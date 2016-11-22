@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/your_dialog_root_element"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical"
+    android:layout_centerHorizontal="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    /*
+
+
+    <TextView
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="Course Name"
+        android:layout_gravity="center"
+        />
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="Minimum Rating"
+        android:layout_gravity="center"
+      />
+
+    <NumberPicker
+        android:id="@+id/np"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+      />
+
+    <TextView
+        android:id="@+id/seekbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="Maximum Price: 50"
+        android:layout_gravity="center"
+        />
+
+    <SeekBar
+        android:id="@+id/your_dialog_seekbar"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:max="50"
+        android:progress="50"/>
+    />
+
+    <CheckBox android:id="@+id/checkbox_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Only Online Tutors"
+        />
+
+</LinearLayout>
