@@ -33,10 +33,6 @@ import android.widget.SeekBar;
 import android.widget.NumberPicker;
 import android.widget.EditText;
 import android.view.LayoutInflater;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
@@ -44,12 +40,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class BrowseActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
-
+    DrawerLayout drawer;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+
     public RecyclerView recycler;
     public TutorsAdapter adapter;
     public TextView txtView;
@@ -58,7 +54,7 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_browse);
-
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -81,7 +77,7 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
         setupNavigationDrawer();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     public void popDialog(View view){
@@ -116,6 +112,8 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
             default:
                 break;
         }
+        drawer.closeDrawer(Gravity.LEFT, false);
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -150,7 +148,6 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
     }
 
     public void toggleMenu(View view) {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(Gravity.LEFT)) {
             drawer.closeDrawer(Gravity.LEFT);
         } else {
@@ -280,35 +277,5 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("Browse Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
-    }
 }
