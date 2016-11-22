@@ -16,6 +16,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.MenuItem;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -51,6 +52,16 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
         handleCheckBox();
 
         setupNavigationDrawer();
+
+        final Button testButton = (Button) findViewById(R.id.testButton);
+        testButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                Intent testIntent = new Intent(BrowseActivity.this, MainMenu.class);
+                BrowseActivity.this.startActivity(testIntent);
+            }
+        });
+
+
     }
 
     @Override

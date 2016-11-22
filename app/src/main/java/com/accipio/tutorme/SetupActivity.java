@@ -146,7 +146,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
                 // TODO: replace with messaging activity if we get to that point
                 return;
             case R.id.drawer_about:
-                // TODO: replace with about page
+                // Meant to be for the about page
                 return;
             case R.id.drawer_policy:
                 // TODO: replace with privacy policy page
