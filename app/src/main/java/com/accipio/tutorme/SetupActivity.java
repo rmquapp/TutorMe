@@ -143,8 +143,8 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
                 toggleMenu(getCurrentFocus());
                 return;
             case R.id.drawer_messages:
-                // TODO: replace with messaging activity if we get to that point
-                return;
+                intent = new Intent(this, BrowseActivity.class);
+                break;
             case R.id.drawer_about:
                 // TODO: replace with about page
                 return;

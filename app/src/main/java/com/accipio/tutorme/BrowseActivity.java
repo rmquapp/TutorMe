@@ -40,15 +40,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class BrowseActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
+
     DrawerLayout drawer;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
 
     public RecyclerView recycler;
     public TutorsAdapter adapter;
-    public TextView txtView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,20 +67,16 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
 
         adapter = populateList(recycler);
         recycler.setAdapter(adapter);
+
         handleCheckBox();
 
-
-
         setupNavigationDrawer();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        //
-
     }
 
     public void popDialog(View view){
         showDialog(adapter,recycler);
     }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -102,8 +95,8 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
                 intent = new Intent(this, SetupActivity.class);
                 break;
             case R.id.drawer_messages:
-                // TODO: replace with messaging activity if we get to that point
-                return;
+                intent = new Intent(this, MessagesActivity.class);
+                break;
             case R.id.drawer_about:
                 // TODO: replace with about page
                 return;
@@ -274,9 +267,4 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
         AlertDialog yourDialog = builder1.create();
         yourDialog.show();
     }
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-
 }
