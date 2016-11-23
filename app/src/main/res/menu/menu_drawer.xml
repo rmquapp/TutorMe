@@ -35,5 +35,9 @@
             android:id="@+id/drawer_policy"
             android:fontFamily="sans-serif-light"
             android:title="Privacy Policy" />
+        <item
+            android:id="@+id/drawer_logout"
+            android:fontFamily="sans-serif-light"
+            android:title="Log Out" />
     </group>
 </menu>

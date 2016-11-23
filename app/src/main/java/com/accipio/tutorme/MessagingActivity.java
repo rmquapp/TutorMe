@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessagingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -61,6 +63,11 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
             case R.id.drawer_policy:
                 // TODO: replace with privacy policy page
                 return;
+            case R.id.drawer_logout:
+                // TODO: remove after demo
+                LoginManager.getInstance().logOut();
+                intent = new Intent(this, MainActivity.class);
+                break;
             default:
                 break;
         }

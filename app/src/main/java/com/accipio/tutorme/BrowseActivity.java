@@ -34,6 +34,8 @@ import android.widget.NumberPicker;
 import android.widget.EditText;
 import android.view.LayoutInflater;
 
+import com.facebook.login.LoginManager;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -103,6 +105,11 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
             case R.id.drawer_policy:
                 // TODO: replace with privacy policy page
                 return;
+            case R.id.drawer_logout:
+                // TODO: remove after demo
+                LoginManager.getInstance().logOut();
+                intent = new Intent(this, MainActivity.class);
+                break;
             default:
                 break;
         }

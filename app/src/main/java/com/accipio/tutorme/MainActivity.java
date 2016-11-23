@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (AccessToken.getCurrentAccessToken() != null) {
             goToHome();
         }
+        else {
+            resetUserData();
+        }
 
         hideBars();
 
@@ -208,6 +211,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPostExecute(Bitmap result) {
             ((TutorMeApplication) MainActivity.this.getApplication()).setImage(result);
         }
+    }
+
+    private void resetUserData() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Editor editor = sharedPrefs.edit();
+        editor.clear();
+        editor.commit();
     }
 
     private void setGlobalUserData(String fname, String lname, String id) {

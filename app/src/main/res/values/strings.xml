@@ -20,7 +20,7 @@
     </string>
     <string-array name="course">
         <item>MATH</item>
-        <item>STAT</item>
+        <item>STATS</item>
         <item>SENG</item>
         <item>CHEM</item>
         <item>ECON</item>

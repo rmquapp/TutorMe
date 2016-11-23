@@ -22,7 +22,10 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -151,6 +154,11 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
             case R.id.drawer_policy:
                 // TODO: replace with privacy policy page
                 return;
+            case R.id.drawer_logout:
+                // TODO: remove after demo
+                LoginManager.getInstance().logOut();
+                intent = new Intent(this, MainActivity.class);
+                break;
             default:
                 break;
         }
@@ -201,7 +209,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        if (((TutorMeApplication) SetupActivity.this.getApplication()).isTutor()) {
+        if (prefs.getBoolean(String.valueOf(isTutor), false)) {
             CheckBox box = (CheckBox)findViewById(R.id.checkBox);
             box.setChecked(true);
         }
