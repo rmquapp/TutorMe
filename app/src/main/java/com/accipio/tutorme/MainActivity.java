@@ -60,9 +60,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FacebookSDKinitializeDelay();
 
         if (AccessToken.getCurrentAccessToken() != null) {
-            goToHome();
+            goToBrowse();
         }
         else {
+            //TODO: remove after demo
+            AccessToken.setCurrentAccessToken(null);
             resetUserData();
         }
 
@@ -169,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void goToHome() {
+    private void goToBrowse() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String fname = prefs.getString("firstName", "");
         String lname = prefs.getString("lastName", "");
