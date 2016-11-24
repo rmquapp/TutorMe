@@ -15,7 +15,7 @@ public class TutorMeApplication extends Application {
     private boolean tutor = false;
     private Bitmap image;
 
-    public String setID() {
+    public String getID() {
         return userID;
     }
 

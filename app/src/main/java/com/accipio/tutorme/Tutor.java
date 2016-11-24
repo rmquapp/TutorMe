@@ -9,18 +9,18 @@ public class Tutor {
     private String name;
     private String desc;
     private String[] courses;
-    private String rating;
+    private float rating;
     private int status;
-    private String price;
+    private String rate;
 
-    public Tutor(String id, String name, String desc, String[] courses, String rating, int status, String price) {
+    public Tutor(String id, String name, String desc, String[] courses, float rating, int status, String rate) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.courses = courses;
         this.rating = rating;
         this.status = status;
-        this.price = price;
+        this.rate = rate;
     }
 
     public String getId() {
@@ -39,7 +39,7 @@ public class Tutor {
         return courses;
     }
 
-    public String getRating() {
+    public float getRating() {
         return rating;
     }
 
@@ -47,5 +47,5 @@ public class Tutor {
         return status;
     }
 
-    public String getPrice() { return price; }
+    public String getRate() { return rate; }
 }

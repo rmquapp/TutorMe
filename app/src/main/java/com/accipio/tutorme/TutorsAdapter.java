@@ -12,29 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.LinkedList;
 
-public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewHolder> implements Filterable{
+
+public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewHolder> implements Filterable {
+
     protected ArrayList<Tutor> mDataSet;
     protected ArrayList<Tutor> filteredList;
     protected ArrayList<Tutor> original;
-    protected Filter tutorFilter;
 
     public TutorsAdapter(ArrayList<Tutor> mDataSet) {
         this.mDataSet = mDataSet;
         this.original = mDataSet;
         this.filteredList = mDataSet;
-
     }
-
-    //private final List<Tutor> tutorList;
-
-
 
     @Override
     public TutorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,8 +41,11 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
     public void onBindViewHolder(TutorViewHolder holder, int position) {
         holder.name.setText(filteredList.get(position).getName());
         holder.desc.setText(filteredList.get(position).getDesc());
-        holder.rating.setText(filteredList.get(position).getRating());
-        holder.price.setText(filteredList.get(position).getPrice());
+        holder.rate.setText("$" + filteredList.get(position).getRate());
+
+        float rating = filteredList.get(position).getRating();
+        holder.rating.setRating(rating);
+        //holder.rating.setStepSize(0.01f);
     }
 
     @Override
@@ -58,7 +55,8 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
 
     public class TutorViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView icon, name, desc, rating, price;
+        TextView icon, name, desc, rate;
+        RatingBar rating;
 
         TutorViewHolder(View itemView) {
             super(itemView);
@@ -66,8 +64,8 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
             icon = (TextView) itemView.findViewById(R.id.icon);
             name = (TextView) itemView.findViewById(R.id.name);
             desc = (TextView) itemView.findViewById(R.id.desc);
-            rating = (TextView) itemView.findViewById(R.id.rating);
-            price = (TextView) itemView.findViewById(R.id.price);
+            rate = (TextView) itemView.findViewById(R.id.rate);
+            rating = (RatingBar) itemView.findViewById(R.id.rating);
         }
     }
 
@@ -75,8 +73,6 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
-
-
 
     @Override
     public Filter getFilter() {
@@ -90,7 +86,6 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
                 notifyDataSetChanged();  // notifies the data with new filtered values
             }
 
-
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();        // Holds the results of a filtering operation in values
@@ -101,18 +96,16 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
                 }
 
                 if (constraint == null || constraint.length() == 0) {
-
                     // set the Original result to return
                     results.count = original.size();
                     results.values = original;
                 }
                 else {
-                    //
                     //filteredTutorList = getFilteredResults(constraint.toString().toLowerCase() );
                     //ArrayList<Tutor> filteredTList = new ArrayList<Tutor>() ;
                     boolean none = false;
                     String splits[] = constraint.toString().toLowerCase().split("-");
-                    String priceStr = splits[0];
+                    String rateStr = splits[0];
                     String ratingStr = splits[1];
                     String courseStr = splits[2];
                     int status = Integer.parseInt(splits[3]);
@@ -122,19 +115,15 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
                         courseStr = " ";
                     }
                     Log.d("none", courseStr);
-                    int priceNum = Integer.parseInt(priceStr.split("_")[1]);
+                    int rateNum = Integer.parseInt(rateStr.split("_")[1]);
                     int ratingNum = Integer.parseInt(ratingStr.split("_")[1]);
-
-
-
 
                     //String dfi[] = {"f","f"};
                     //Tutor tutor1 = new Tutor("123456", "Person One", "Grad student studying Memes",dfi, "4.1", 0, "35");
                     //FilteredArrList.add(tutor1);
                     //
                     for (Tutor item : mDataSet) {
-
-                        if ((Integer.parseInt(item.getPrice()) <= priceNum) && (Float.parseFloat(item.getRating()) >= ratingNum) && (item.getStatus() >= status)) {
+                        if ((Integer.parseInt(item.getRate()) <= rateNum) && (item.getRating() >= ratingNum) && (item.getStatus() >= status)) {
                             if (!none) {
                                 for (int i = 0; i < item.getCourses().length; i++) {
                                     if (item.getCourses()[i].toLowerCase().equals(courseStr)) {
@@ -142,12 +131,10 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
                                     }
                                 }
                             }
-
                             if (none) {
                                 FilteredArrList.add(item);
                             }
-                    }
-
+                        }
                     }
                     /**
                     //}

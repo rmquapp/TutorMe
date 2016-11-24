@@ -122,13 +122,21 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
     private TutorsAdapter populateList(RecyclerView recycler) {
         ArrayList<Tutor> tutors = new ArrayList<>();
         // Test data
-        String[] courses = {"CPSC411"};
-        Tutor tutor1 = new Tutor("123456", "Person One", "Grad student studying Memes", courses, "4.1", 0, "35");
-        Tutor tutor2 = new Tutor("111111", "Test Person", "Professional tutor", courses, "3.0", 1, "23");
-        Tutor tutor3 = new Tutor("222222", "Other Person", "4th year Science student", courses, "5.0", 1, "10");
-        tutors.add(tutor3);
-        tutors.add(tutor2);
-        tutors.add(tutor1);
+        tutors.add(new Tutor("000000", "Fred Riley", "Grad student of Chemistry", new String[] {"CHEM210", "CHEM", "CHEMISTRY"}, 4.1f, 0, "20"));
+        tutors.add(new Tutor("111111", "Clarence McCoy", "Professional math tutor", new String[] {"MATH", "MATH211", "MATH271", "MATH"}, 3.0f, 1, "35"));
+        tutors.add(new Tutor("222222", "Karl Wells", "4th year Science, A- student", new String[] {"SCIENCE", "CHEM210"}, 5.0f, 1, "15"));
+        tutors.add(new Tutor("333333", "Arlene Ruiz", "3rd year studying Business", new String[] {"FNCE317", "ACCT217", "ACCT301"}, -1, 0, "20"));
+        tutors.add(new Tutor("444444", "Jay Owens", "Professional tutor, specializing in Electrical Engineering", new String[] {"ENGG", "ENEL300", "ENEL"}, 3.9f, 0, "50"));
+        tutors.add(new Tutor("555555", "Allen Chambers", "Teaching math, stats, econ, and more", new String[] {"MATH", "STATS", "ECON201", "ECON203"}, -1, 0, "10"));
+        tutors.add(new Tutor("666666", "Kendra Rodriguez", "Masters student in Computer Science", new String[] {"CPSC231", "CPSC233", "CPSC331", "CPSC441"}, 4.5f, 1, "30"));
+        tutors.add(new Tutor("777777", "Robert Chan", "Professional tutor, TA'd many CPSC courses", new String[] {"CPSC", "CPSC217", "CPSC219", "CPSC235"}, -1, 1, "40"));
+        tutors.add(new Tutor("888888", "Shawn Ingram", "Studying Physics", new String[] {"PHYSICS", "PHYS211", "PHYS221"}, 5.0f, 1, "10"));
+        tutors.add(new Tutor("999999", "Melody Fletcher", "English and languages", new String[] {"ENGL201", "ENGL301", "FRENCH", "GERMAN"}, 3.5f, 0, "25"));
+        tutors.add(new Tutor("123345", "Matt Smith", "TA for stats, cpsc, and math", new String[] {"MATH211", "MATH249", "MATH271", "STAT213", "STAT205", "CPSC231"}, 3.3f, 0, "20"));
+        tutors.add(new Tutor("234567", "Roland Byrd", "Economics & business tutor, 4.0 GPA", new String[] {"ECON201", "MKTG317", "FINANCE"}, -1, 1, "15"));
+        tutors.add(new Tutor("345678", "Caleb Bennet", "Need help with any math course? Contact me!", new String[] {"MATH", "MATH211", "MATH249", "MATH267", "MATH311"}, 2.0f, 1, "10"));
+        tutors.add(new Tutor("456789", "Linh Cybulski", "Grad student, excellent tutor", new String[] {"MATH", "STATS205", "STATS", "ECON", "ENGG"}, 3.0f, 0, "10"));
+        tutors.add(new Tutor("567890", "Eduardo Kahle", "Math and chem - help with assignments, studying", new String[] {"MATH211", "MATH271", "MATH249", "CHEM213", "CHEM"}, -1, 1, "10"));
         TutorsAdapter adapter = new TutorsAdapter(tutors);
         return adapter;
     }
@@ -212,7 +220,7 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
                 //Do something here with new value
-                seekText.setText("Maximum Price: " + progress);
+                seekText.setText("Maximum Rate: " + progress);
             }
 
             public void onStartTrackingTouch(SeekBar arg0) {
