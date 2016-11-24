@@ -37,7 +37,7 @@
     <string name="ok">update </string>
     <string name="cancel">cancel</string>
     <string-array name="filters">
-        <item>Price</item>
+        <item>Rate</item>
         <item>Rating</item>
     </string-array>
     <string name="title_activity_messages">MessagesActivity</string>

@@ -6,7 +6,6 @@ package com.accipio.tutorme;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +49,10 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
 
     @Override
     public int getItemCount() {
-        return filteredList.size();
+        if (filteredList != null) {
+            return filteredList.size();
+        }
+        return 0;
     }
 
     public class TutorViewHolder extends RecyclerView.ViewHolder {
@@ -81,47 +83,38 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
             @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint,FilterResults results) {
-
-                filteredList = (ArrayList<Tutor>) results.values; // has the filtered values
-                notifyDataSetChanged();  // notifies the data with new filtered values
+                filteredList = (ArrayList<Tutor>) results.values;
+                notifyDataSetChanged();
             }
 
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults results = new FilterResults();        // Holds the results of a filtering operation in values
+                FilterResults results = new FilterResults();
                 ArrayList<Tutor> FilteredArrList = new ArrayList<Tutor>();
 
                 if (original == null) {
-                    original = new ArrayList<Tutor>(mDataSet); // saves the original data in mOriginalValues
+                    original = new ArrayList<Tutor>(mDataSet);
                 }
 
                 if (constraint == null || constraint.length() == 0) {
-                    // set the Original result to return
                     results.count = original.size();
                     results.values = original;
                 }
                 else {
-                    //filteredTutorList = getFilteredResults(constraint.toString().toLowerCase() );
-                    //ArrayList<Tutor> filteredTList = new ArrayList<Tutor>() ;
                     boolean none = false;
-                    String splits[] = constraint.toString().toLowerCase().split("-");
-                    String rateStr = splits[0];
-                    String ratingStr = splits[1];
-                    String courseStr = splits[2];
-                    int status = Integer.parseInt(splits[3]);
-
+                    String constraints[] = constraint.toString().toLowerCase().split("-");
+                    String rateStr = constraints[0];
+                    String ratingStr = constraints[1];
+                    String courseStr = constraints[2];
                     if (courseStr.equals("none")) {
                         none = true;
                         courseStr = " ";
                     }
-                    Log.d("none", courseStr);
+
+                    int status = Integer.parseInt(constraints[3]);
                     int rateNum = Integer.parseInt(rateStr.split("_")[1]);
                     int ratingNum = Integer.parseInt(ratingStr.split("_")[1]);
 
-                    //String dfi[] = {"f","f"};
-                    //Tutor tutor1 = new Tutor("123456", "Person One", "Grad student studying Memes",dfi, "4.1", 0, "35");
-                    //FilteredArrList.add(tutor1);
-                    //
                     for (Tutor item : mDataSet) {
                         if ((Integer.parseInt(item.getRate()) <= rateNum) && (item.getRating() >= ratingNum) && (item.getStatus() >= status)) {
                             if (!none) {
@@ -136,52 +129,13 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
                             }
                         }
                     }
-                    /**
-                    //}
-                    // if (found)
-                    //{ results.add(item);}
-                    // }
-                    //}
-                     **/
                     results.values = FilteredArrList;
                     results.count = FilteredArrList.size();
                 }
-
-
-                //filteredList.addAll((ArrayList<Tutor> ) results.values);
                 return results;
             }
         };
         return filter;
-
-    /**
-    protected ArrayList<Tutor> getFilteredResults(String constraint) {
-        ArrayList<Tutor> results = new ArrayList<>();
-        boolean found = false;
-        String splits[] = constraint.split("-");
-        String priceStr = splits[0];
-        String ratingStr = splits[1];
-        String courseStr = splits[2];
-
-        int priceNum = Integer.parseInt(priceStr.split(".")[1]);
-        int ratingNum = Integer.parseInt(ratingStr.split(".")[1]);
-
-        for (Tutor item : mDataSet) {
-           // if ((Integer.parseInt(item.getPrice()) <= priceNum) && (Integer.parseInt(item.getRating()) >= ratingNum)) {
-               // for (int i = 0; i < item.getCourses().length; i++ ) {
-                //    if (item.getCourses()[i].contains(courseStr)) {
-                        results.add(item);
-                       // found = true;
-                    }
-                //}
-               // if (found)
-                //{ results.add(item);}
-           // }
-        //}
-        //results
-        return results;
     }
-**/
-}
 }
 

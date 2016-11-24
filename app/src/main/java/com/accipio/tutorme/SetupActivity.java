@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -105,7 +104,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
         BubbleTextView[] bubbles = {toLearn, toTeach};
 
         for (BubbleTextView bubble : bubbles) {
-            /* Ensures that predictive text is off (also disables auto-capitalization for certain keyboards) */
+            /* Ensures that predictive text is off, sets to uppercase */
             bubble.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
             String[] item = getResources().getStringArray(R.array.course);
@@ -146,7 +145,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
                 toggleMenu(getCurrentFocus());
                 return;
             case R.id.drawer_messages:
-                intent = new Intent(this, BrowseActivity.class);
+                intent = new Intent(this, MessagesActivity.class);
                 break;
             case R.id.drawer_about:
                 // TODO: replace with about page

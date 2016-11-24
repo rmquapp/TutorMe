@@ -1,67 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/your_dialog_root_element"
+<LinearLayout android:id="@+id/dialog_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center_vertical"
     android:layout_centerHorizontal="true"
+    android:paddingTop="22dp"
+    android:paddingBottom="22dp"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    /*
 
 
-    <TextView
-        android:id="@+id/edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:text="Course Name"
-        android:layout_gravity="center"
-        />
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/searchCourse"
+        android:textCursorDrawable="@null"
+        android:hint="Course"
+        android:inputType="textCapCharacters"
+        android:textColorHint="#808080"
+        android:backgroundTint="#808080"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        />
+        android:layout_marginLeft="4dp" />
 
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/minrating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
+        android:textColor="#000000"
         android:text="Minimum Rating"
-        android:layout_gravity="center"
-      />
+        android:layout_gravity="left"
+        android:textSize="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="6dp" />
 
-    <NumberPicker
+    <com.accipio.tutorme.NumberPicker
         android:id="@+id/np"
+        android:descendantFocusability="blocksDescendants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-      />
+        android:layout_gravity="left|center"
+        android:scaleX="0.85"
+        android:scaleY="0.85"
+        android:textSize="16dp"
+        android:layout_marginTop="-15dp"
+        android:layout_marginLeft="10dp" />
 
     <TextView
-        android:id="@+id/seekbar"
+        android:id="@+id/maxrate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:text="Maximum Price: 50"
-        android:layout_gravity="center"
-        />
+        android:textColor="#000000"
+        android:text="Maximum Rate"
+        android:layout_gravity="left"
+        android:textSize="16dp"
+        android:layout_marginLeft="6dp" />
 
     <SeekBar
-        android:id="@+id/your_dialog_seekbar"
-        android:layout_width="300dp"
+        android:id="@+id/seekbar"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:max="50"
-        android:progress="50"/>
+        android:layout_gravity="left"
+        android:max="80"
+        android:progress="80"
+        android:layout_marginLeft="-10dp"
+        android:layout_width="240dp" />
     />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
     <CheckBox android:id="@+id/checkbox_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Only Online Tutors"
-        />
+        android:text="Show only available tutors"
+        android:textSize="16dp" />
 
 </LinearLayout>

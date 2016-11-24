@@ -128,11 +128,11 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
         tutors.add(new Tutor("333333", "Arlene Ruiz", "3rd year studying Business", new String[] {"FNCE317", "ACCT217", "ACCT301"}, -1, 0, "20"));
         tutors.add(new Tutor("444444", "Jay Owens", "Professional tutor, specializing in Electrical Engineering", new String[] {"ENGG", "ENEL300", "ENEL"}, 3.9f, 0, "50"));
         tutors.add(new Tutor("555555", "Allen Chambers", "Teaching math, stats, econ, and more", new String[] {"MATH", "STATS", "ECON201", "ECON203"}, -1, 0, "10"));
-        tutors.add(new Tutor("666666", "Kendra Rodriguez", "Masters student in Computer Science", new String[] {"CPSC231", "CPSC233", "CPSC331", "CPSC441"}, 4.5f, 1, "30"));
-        tutors.add(new Tutor("777777", "Robert Chan", "Professional tutor, TA'd many CPSC courses", new String[] {"CPSC", "CPSC217", "CPSC219", "CPSC235"}, -1, 1, "40"));
+        tutors.add(new Tutor("666666", "Kendra Rodriguez", "Masters student in Computer Science", new String[] {"CPSC", "CPSC231", "CPSC233", "CPSC331", "CPSC441"}, 4.5f, 1, "30"));
+        tutors.add(new Tutor("777777", "Robert Chan", "Professional tutor, TA'd many CPSC courses", new String[] {"CPSC", "CPSC", "CPSC217", "CPSC219", "CPSC235"}, -1, 1, "40"));
         tutors.add(new Tutor("888888", "Shawn Ingram", "Studying Physics", new String[] {"PHYSICS", "PHYS211", "PHYS221"}, 5.0f, 1, "10"));
         tutors.add(new Tutor("999999", "Melody Fletcher", "English and languages", new String[] {"ENGL201", "ENGL301", "FRENCH", "GERMAN"}, 3.5f, 0, "25"));
-        tutors.add(new Tutor("123345", "Matt Smith", "TA for stats, cpsc, and math", new String[] {"MATH211", "MATH249", "MATH271", "STAT213", "STAT205", "CPSC231"}, 3.3f, 0, "20"));
+        tutors.add(new Tutor("123345", "Matt Smith", "TA for stats, cpsc, and math", new String[] {"MATH211", "MATH249", "MATH271", "STAT213", "STAT205", "CPSC", "CPSC231"}, 3.3f, 0, "20"));
         tutors.add(new Tutor("234567", "Roland Byrd", "Economics & business tutor, 4.0 GPA", new String[] {"ECON201", "MKTG317", "FINANCE"}, -1, 1, "15"));
         tutors.add(new Tutor("345678", "Caleb Bennet", "Need help with any math course? Contact me!", new String[] {"MATH", "MATH211", "MATH249", "MATH267", "MATH311"}, 2.0f, 1, "10"));
         tutors.add(new Tutor("456789", "Linh Cybulski", "Grad student, excellent tutor", new String[] {"MATH", "STATS205", "STATS", "ECON", "ENGG"}, 3.0f, 0, "10"));
@@ -142,14 +142,15 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
     }
 
     private void handleCheckBox() {
-        boolean isTutor = ((TutorMeApplication) BrowseActivity.this.getApplication()).isTutor();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isTutor = prefs.getBoolean(String.valueOf("isTutor"), false);
 
         if (isTutor) {
             final SwitchCompat status = (SwitchCompat) findViewById(R.id.status);
             status.setVisibility(View.VISIBLE);
             status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    String s = isChecked ? "Online" : "Offline";
+                    String s = isChecked ? "Available" : "Unavailable";
                     status.setText(s);
                 }
             });
@@ -185,92 +186,63 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
         emailView.setText(email);
     }
 
-
     public void showDialog(final TutorsAdapter adapter, final RecyclerView recycler) {
-
-        final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        //Dialog yourDialog = new Dialog(this);
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View layout = inflater.inflate(R.layout.dialog_layout, (ViewGroup)findViewById(R.id.your_dialog_root_element));
-        builder1.setView(layout);
+        View layout = inflater.inflate(R.layout.dialog_layout, (ViewGroup)findViewById(R.id.dialog_layout));
 
-        final TextView seekText = (TextView) layout.findViewById(R.id.seekbar);
-        final SeekBar seek = (SeekBar)layout.findViewById(R.id.your_dialog_seekbar);
-        builder1.setTitle("Filter Options");
-        builder1.setCancelable(true);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(layout);
+        builder.setTitle(" Search Options");
+        builder.setCancelable(true);
 
-        final TextView editText = (TextView) layout.findViewById(R.id.edit);
-        final EditText input = (EditText) layout.findViewById(R.id.phone);
-
+        final TextView seekText = (TextView) layout.findViewById(R.id.maxrate);
+        final SeekBar seek = (SeekBar)layout.findViewById(R.id.seekbar);
+        final EditText input = (EditText) layout.findViewById(R.id.searchCourse);
         final CheckBox checkBox = (CheckBox) layout.findViewById(R.id.checkbox_id);
 
-        final TextView tv = (TextView) layout.findViewById(R.id.tv);
+        final TextView tv = (TextView) layout.findViewById(R.id.minrating);
         final NumberPicker np = (NumberPicker) layout.findViewById(R.id.np);
         np.setMinValue(1);
-        //Specify the maximum value/number of NumberPicker
         np.setMaxValue(5);
         np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){
-                //Display the newly selected number from picker
                 tv.setText("Minimum Rating: " + newVal);
             }
         });
 
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                //Do something here with new value
                 seekText.setText("Maximum Rate: " + progress);
             }
 
             public void onStartTrackingTouch(SeekBar arg0) {
-                // TODO Auto-generated method stub
-
             }
 
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
             }
         });
 
-
-        builder1.setPositiveButton(
+        builder.setPositiveButton(
                 "Okay",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id ) {
-                        String checked1;
-                        if (checkBox.isChecked()) {
-                           checked1 = "1";
-                        }
-                        else {
-                            checked1 = "0";
-                        }
-                        int value = seek.getProgress();
-                        if (value <= 0){
-                            value = 50;
-                        }
-                        int ratingNumber = np.getValue();
-                        String m_Text = input.getText().toString();
-                        if (m_Text.equals("")) {
-                            m_Text = "NONE";
-                        }
-                        String filterStringFinal = "price_" + value + "-";
+                        String checked = (checkBox.isChecked()) ? "1" : "0";
+                        int rating = np.getValue();
+                        int rate = seek.getProgress();
+                        rate = (rate <=0) ? 80 : rate;
+                        String mText = input.getText().toString().toUpperCase();
+                        mText = (mText.equals("")) ? "NONE" : mText;
 
-                        filterStringFinal = filterStringFinal + "rating_" + ratingNumber + "-";
-                        filterStringFinal = filterStringFinal + m_Text + "-"+ checked1;
-                        // EG "price.30-rating.5-CPSC441"
-                        //Log.d("tag",filterStringFinal);
-
+                        String filterStringFinal = "rate_" + rate + "-";
+                        filterStringFinal = filterStringFinal + "rating_" + rating + "-";
+                        filterStringFinal = filterStringFinal + mText + "-" + checked;
 
                         adapter.getFilter().filter(filterStringFinal);
-
-                        //recycler.setAdapter(adapter);
-                        //dialog.dismiss();
                     }
                 });
 
-        builder1.setNegativeButton(
+        builder.setNegativeButton(
                 "Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -278,8 +250,7 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
                     }
                 });
 
-
-        AlertDialog yourDialog = builder1.create();
+        AlertDialog yourDialog = builder.create();
         yourDialog.show();
     }
 }
