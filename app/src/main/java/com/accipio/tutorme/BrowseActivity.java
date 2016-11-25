@@ -1,23 +1,22 @@
 package com.accipio.tutorme;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v7.widget.SwitchCompat;
-import android.text.InputType;
-import android.util.Log;
+import android.transition.TransitionManager;
 import android.view.MenuItem;
 import android.view.Gravity;
 import android.view.View;
@@ -26,9 +25,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.widget.Adapter;
 import android.widget.SeekBar;
 import android.widget.NumberPicker;
 import android.widget.EditText;
@@ -180,8 +176,9 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
         CircleImageView image = (CircleImageView) hView.findViewById(R.id.header_image);
         image.setImageBitmap(picture);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String email = prefs.getString("email", "");
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //String email = prefs.getString("email", "");
+        String email = ((TutorMeApplication) BrowseActivity.this.getApplication()).getEmail();
         TextView emailView = (TextView) hView.findViewById(R.id.header_email);
         emailView.setText(email);
     }
@@ -213,7 +210,7 @@ public class BrowseActivity extends AppCompatActivity implements OnNavigationIte
 
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                seekText.setText("Maximum Rate: " + progress);
+                seekText.setText("Maximum Rate: $" + progress + "/hour");
             }
 
             public void onStartTrackingTouch(SeekBar arg0) {

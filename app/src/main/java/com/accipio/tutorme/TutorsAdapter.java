@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.RatingBar;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewHolder> implements Filterable {
+public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewHolder> implements Filterable, View.OnClickListener {
 
     protected ArrayList<Tutor> mDataSet;
     protected ArrayList<Tutor> filteredList;
@@ -29,10 +30,17 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
         this.filteredList = mDataSet;
     }
 
+    private int expandedPosition = -1;
+    private boolean isOther = true;
+
     @Override
     public TutorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
         TutorViewHolder tutorViewHolder = new TutorViewHolder(v);
+
+        tutorViewHolder.cardView.setOnClickListener(this);
+        tutorViewHolder.cardView.setTag(tutorViewHolder);
+
         return tutorViewHolder;
     }
 
@@ -45,6 +53,14 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
         float rating = filteredList.get(position).getRating();
         holder.rating.setRating(rating);
         //holder.rating.setStepSize(0.01f);
+
+        if (position == expandedPosition && isOther) {
+            holder.message.setVisibility(View.VISIBLE);
+            holder.hire.setVisibility(View.VISIBLE);
+        } else {
+            holder.message.setVisibility(View.GONE);
+            holder.hire.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -59,6 +75,7 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
         CardView cardView;
         TextView icon, name, desc, rate;
         RatingBar rating;
+        Button message, hire;
 
         TutorViewHolder(View itemView) {
             super(itemView);
@@ -68,6 +85,8 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
             desc = (TextView) itemView.findViewById(R.id.desc);
             rate = (TextView) itemView.findViewById(R.id.rate);
             rating = (RatingBar) itemView.findViewById(R.id.rating);
+            message = (Button) itemView.findViewById(R.id.messageButton);
+            hire = (Button) itemView.findViewById(R.id.hireButton);
         }
     }
 
@@ -136,6 +155,25 @@ public class TutorsAdapter extends RecyclerView.Adapter<TutorsAdapter.TutorViewH
             }
         };
         return filter;
+    }
+
+    @Override
+    public void onClick(View view) {
+        TutorViewHolder holder = (TutorViewHolder) view.getTag();
+        if (holder != null) {
+            // Check for an expanded view, collapse if you find one
+            if (expandedPosition >= 0) {
+                notifyItemChanged(expandedPosition);
+            }
+            if (isOther) {
+                isOther = (holder.getPosition() == expandedPosition) ? false : true;
+            }
+            else {
+                isOther = true;
+            }
+            expandedPosition = holder.getPosition();
+            notifyItemChanged(expandedPosition);
+        }
     }
 }
 

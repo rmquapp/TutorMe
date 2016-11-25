@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
     <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/browse_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardElevation="0.5dp"
         card_view:cardCornerRadius="1dp"
         card_view:contentPaddingTop="0dp"
+        android:animateLayoutChanges="true"
         android:layout_marginBottom="6dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/name"
+                android:color="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="1dp"
+                android:paddingRight="5dp"
+                android:paddingTop="14dp"
+                android:text="First Last"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/desc"
+                android:layout_alignStart="@+id/desc"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
 
             <TextView
                 android:id="@+id/icon"
@@ -31,19 +47,6 @@
                 android:textSize="32sp" />
 
             <TextView
-                android:id="@+id/name"
-                android:color="#000000"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/icon"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingTop="10dp"
-                android:text="First Last"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,20 +58,20 @@
                 android:color="#000000"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:text="Description"
                 android:gravity="center_vertical"
                 android:layout_marginRight="60dp" />
 
             <ImageView
                 android:layout_width="50dp"
-                android:layout_height="50dp"
                 android:id="@+id/image"
                 android:alpha=".1"
                 android:background="@drawable/tutor"
                 android:layout_alignTop="@+id/icon"
                 android:layout_marginLeft="13dp"
-                android:layout_margin="5dp" />
+                android:layout_margin="5dp"
+                android:layout_height="50dp" />
 
             <RatingBar
                 android:layout_height="wrap_content"
@@ -82,7 +85,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="-7dp"
-                android:layout_marginBottom="-3dp" />
+                android:layout_marginBottom="-1dp" />
 
             <TextView
                 android:id="@+id/rate"
@@ -98,6 +101,37 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="5dp"
                 android:layout_marginEnd="5dp" />
+
+            <Button
+                android:text="Hire"
+                android:background="@android:color/transparent"
+                android:id="@+id/hireButton"
+                android:visibility="visible"
+                android:textSize="12sp"
+                android:layout_alignBottom="@+id/messageButton"
+                android:layout_toRightOf="@+id/messageButton"
+                android:layout_toEndOf="@+id/messageButton"
+                android:layout_alignTop="@+id/messageButton"
+                android:textColor="#B94E0D"
+                android:layout_height="30dp"
+                android:layout_width="30dp" />
+
+            <Button
+                android:text="Message"
+                android:layout_width="wrap_content"
+                android:background="@android:color/transparent"
+                android:id="@+id/messageButton"
+                android:visibility="visible"
+                android:textSize="12sp"
+                android:paddingBottom="-10dp"
+                android:textColor="#B94E0D"
+                android:layout_below="@+id/desc"
+                android:layout_alignLeft="@+id/desc"
+                android:layout_alignStart="@+id/desc"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:layout_marginRight="-12dp"
+                android:layout_height="34dp" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

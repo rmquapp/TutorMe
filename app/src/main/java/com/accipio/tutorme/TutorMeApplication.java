@@ -12,6 +12,7 @@ public class TutorMeApplication extends Application {
     private String userID;
     private String firstName;
     private String lastName;
+    private String email;
     private boolean tutor = false;
     private Bitmap image;
 
@@ -37,6 +38,14 @@ public class TutorMeApplication extends Application {
 
     public void setLastName(String lname) {
         lastName = lname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String address) {
+        email = address;
     }
 
     public boolean isTutor() {

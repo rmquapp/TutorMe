@@ -3,13 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#142553</item>
-        <item name="colorPrimaryDark">#00113F</item>
+        <item name="colorPrimary">#002A67</item>
+        <item name="colorPrimaryDark">#00205D</item>
         <item name="colorAccent">#B94E0D</item>
     </style>
 
     <style name="Switch" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlActivated">#142553</item>
+        <item name="colorControlActivated">#063E7B</item>
     </style>
 
     <style name="EditText" parent="Theme.AppCompat.Light">

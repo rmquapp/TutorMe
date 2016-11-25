@@ -58,8 +58,8 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
         actionBar.setCustomView(mActionBarView);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
-        int resourceId = getResources().getIdentifier("actionbar_bg", "drawable", getPackageName());
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(resourceId));
+//        int resourceId = getResources().getIdentifier("actionbar_bg", "drawable", getPackageName());
+//        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(resourceId));
 
         info = (TextView)findViewById(R.id.info);
         findViewById(R.id.go).setOnClickListener(this);
@@ -224,6 +224,9 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
             editor.putString(String.valueOf(id), text);
         }
 
+        //TODO: take this out after log out is removed
+        String email = ((EditText) findViewById(R.id.email)).getText().toString();
+        ((TutorMeApplication) SetupActivity.this.getApplication()).setEmail(email);
         ((TutorMeApplication) SetupActivity.this.getApplication()).setTutor(isTutor);
         editor.putBoolean("isTutor", isTutor);
 

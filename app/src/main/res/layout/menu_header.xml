@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:textColor="#ffffff"
+            android:textColor="#FFFFFF"
             android:text="First Last"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -29,7 +29,7 @@
             android:id="@+id/header_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
+            android:textColor="#FFFFFF"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
             android:text="user@university.com"
